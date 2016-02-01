@@ -1,0 +1,14 @@
+{
+  "in": "client/app.less",
+  "out": "dist/bundle.css",
+  "less": true,
+  "browsers": ["last 2 versions"],
+  "rem": false,
+  "pseudoElements": false,
+  "opacity": false,
+  "sourcemaps": {
+    "map": {
+      "inline": false
+    }
+  }
+}
