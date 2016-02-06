@@ -1,17 +1,15 @@
+'use strict';
+
 const express = require('express');
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const path = require('path');
+
 const app = express();
+const env = process.env.NODE_ENV || 'development';
+const config = require('./config/config')[env];
 
-const port = process.env.PORT || 3000;
-
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use('/public', express.static(path.join(__dirname, '../public')));
-app.use('/dist', express.static(path.join(__dirname, '../dist')));
-
-require('./routes')(app);
+require('./config/express')(app, config);
+require('./config/mongoose')(config);
+require('./config/passport')();
+require('./config/routes')(app);
 
 app.listen(port, function () {
   console.log('Listening on PORT: ' + port);
