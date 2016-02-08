@@ -12,9 +12,9 @@ module.exports = function (app) {
 
   // API routes
   app.use('/', AuthRouter);
-  app.use('/coffee', CoffeeRouter);
-  app.use('/emotions', EmotionRouter);
-  app.use('/ingredients', IngredientRouter);
+  app.use('/api/coffee', CoffeeRouter);
+  app.use('/api/emotions', EmotionRouter);
+  app.use('/api/ingredients', IngredientRouter);
 
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
