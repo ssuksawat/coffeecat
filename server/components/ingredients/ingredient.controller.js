@@ -29,7 +29,7 @@ function getIngredients(req, res) {
 }
 
 function updateIngredient(req, res) {
-  return Ingredient.findByIdAndUpdate(req.params.id).exec()
+  return Ingredient.findByIdAndUpdate(req.params.id, req.body).exec()
     .then(() => res.sendStatus(200))
     .catch(err => res.status(400).send({reason: err.toString()}));
 }

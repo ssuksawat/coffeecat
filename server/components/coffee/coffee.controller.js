@@ -41,7 +41,7 @@ function getDrinkById(req, res) {
 }
 
 function updateDrink(req, res) {
-  return Coffee.findByIdAndUpdate(req.params.id).exec()
+  return Coffee.findByIdAndUpdate(req.params.id, req.body).exec()
     .then(() => res.sendStatus(200))
     .catch(err => res.status(400).send({reason: err.toString()}));
 }
