@@ -31,12 +31,13 @@ function deleteDrink(req, res) {
 function getDrinks(req, res) {
   return Coffee.find({}).exec()
     .then(drinks => res.send(drinks))
-    .catch(err => res.send(err));
+    .catch(err => res.status(500).send(err));
 }
 
 function getDrinkById(req, res) {
   return Coffee.findById(req.params.id).exec()
-    .then(drink => res.send(drink));
+    .then(drink => res.send(drink))
+    .catch(err => res.status(500).send(err));
 }
 
 function updateDrink(req, res) {
