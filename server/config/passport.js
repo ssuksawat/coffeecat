@@ -1,9 +1,8 @@
 'use strict';
 
 const passport = require('passport');
-const mongoose = require('mongoose');
 const LocalStrategy = require('passport-local').Strategy;
-const User = mongoose.model('User');
+const User = require('mongoose').model('User');
 
 module.exports = function () {
 

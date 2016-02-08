@@ -30,7 +30,8 @@ function deleteDrink(req, res) {
 
 function getDrinks(req, res) {
   return Coffee.find({}).exec()
-    .then(drinks => res.send(drinks));
+    .then(drinks => res.send(drinks))
+    .catch(err => res.send(err));
 }
 
 function getDrinkById(req, res) {

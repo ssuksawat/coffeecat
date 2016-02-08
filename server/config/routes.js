@@ -3,13 +3,17 @@
 const config = require('./config');
 const errors = require('../components/errors');
 
+const AuthRouter = require('../components/auth');
 const CoffeeRouter = require('../components/coffee');
+const EmotionRouter = require('../components/emotions');
 const IngredientRouter = require('../components/ingredients');
 
 module.exports = function (app) {
 
   // API routes
+  app.use('/', AuthRouter);
   app.use('/coffee', CoffeeRouter);
+  app.use('/emotions', EmotionRouter);
   app.use('/ingredients', IngredientRouter);
 
   // All undefined asset or api routes should return a 404
