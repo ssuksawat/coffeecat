@@ -1,5 +1,16 @@
 const angular = require('angular');
+const ngResource = require('angular-resource');
+const ngMaterial = require('angular-material');
 const uiRouter = require('ui-router');
 
-console.log('angular ', angular);
-console.log('ui-router ', uiRouter);
+const app = angular.module('coffeecat', [
+  ngResource,
+  uiRouter,
+  ngMaterial
+]);
+
+require('./app.routes')(app);
+
+angular.element(document).ready(() => {
+  angular.bootstrap(document, ['coffeecat']);
+});
