@@ -11,7 +11,7 @@ module.exports = {
 
 function login(req, res, next) {
   req.body.username = req.body.username.toLowerCase();
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local', (err, user) => {
     if (err) { return next(err); }
     if (!user) { return res.status(401).send({success: false}); }
     req.logIn(user, (err) => {
