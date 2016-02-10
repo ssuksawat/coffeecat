@@ -1,0 +1,29 @@
+<div class="auth" layout="row" layout-align="center center">
+  <form class="md-whiteframe-z1 auth__form" layout="column" ng-submit="auth.login()">
+    <section class="auth__header" layout="row">
+      <span flex></span>
+      <h2 class="md-primary">CoffeeCat Login</h2>
+      <span flex></span>
+    </section>
+    <section class="auth__body">
+      <md-content layout="column" layout-padding>
+        <h5 ng-show="auth.error" class="text-warning">
+          {{ auth.error }}
+        </h5>
+        <md-input-container>
+          <label>Username</label>
+          <input ng-model="auth.credentials.username" type="text" ng-required="true">
+        </md-input-container>
+        <md-input-container>
+          <label>Password</label>
+          <input ng-model="auth.credentials.password" type="password" ng-required="true">
+        </md-input-container>
+      </md-content>
+    </section>
+    <section class="auth__footer" layout="row" layout-sm="column">
+      <md-button type="submit" class="md-primary md-raised"
+                 ng-click="auth.login()" aria-label="log in"
+                 flex flex-order-sm="1">Continue</md-button>
+    </section>
+  </form>
+</div>

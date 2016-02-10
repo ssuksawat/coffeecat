@@ -9,7 +9,7 @@ const config = require('./config/config')[env];
 require('./config/mongoose')(config);
 require('./config/express')(app, config);
 require('./config/passport')();
-require('./config/routes')(app);
+require('./config/routes')(app, config);
 
 if (env === 'development') { require('./seeds')(); }
 

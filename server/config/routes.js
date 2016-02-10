@@ -1,6 +1,5 @@
 'use strict';
 
-const config = require('./config');
 const errors = require('../components/errors');
 
 const AuthRouter = require('../components/auth');
@@ -8,10 +7,10 @@ const CoffeeRouter = require('../components/coffee');
 const EmotionRouter = require('../components/emotions');
 const IngredientRouter = require('../components/ingredients');
 
-module.exports = function (app) {
+module.exports = function (app, config) {
 
   // API routes
-  app.use('/', AuthRouter);
+  app.use('/api', AuthRouter);
   app.use('/api/coffee', CoffeeRouter);
   app.use('/api/emotions', EmotionRouter);
   app.use('/api/ingredients', IngredientRouter);
@@ -23,6 +22,6 @@ module.exports = function (app) {
   // All other routes should redirect to the index.html
   app.route('/*')
     .get((req, res) => {
-      res.sendfile(config.rootPath + '/public/index.html');
+      res.sendFile(config.rootPath + '/public/index.html');
     });
 };

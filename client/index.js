@@ -4,11 +4,16 @@ const ngMaterial = require('angular-material');
 const uiRouter = require('ui-router');
 
 const app = angular.module('coffeecat', [
+  /* Dependencies */
   ngResource,
   uiRouter,
-  ngMaterial
+  ngMaterial,
+
+  /* Components */
+  require('./auth')
 ]);
 
+/* App Config */
 require('./app.routes')(app);
 
 angular.element(document).ready(() => {
