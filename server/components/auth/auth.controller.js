@@ -16,7 +16,15 @@ function login(req, res, next) {
     if (!user) { return res.status(401).send({success: false}); }
     req.logIn(user, (err) => {
       if (err) { return next(err); }
-      return res.send({success: true, user: user});
+      return res.send({
+        success: true,
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          roles: user.roles,
+          username: user.username
+        }
+      });
     });
   })(req, res, next);
 }
