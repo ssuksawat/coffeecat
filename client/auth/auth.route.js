@@ -10,6 +10,10 @@ function AuthRoute($stateProvider) {
     })
     .state('logout', {
       url: '/logout',
-      resolve: {}
+      resolve: {
+        logout: ['$state, authService', function ($state, authService) {
+          return authService.logout().then(() => $state.go('login'));
+        }]
+      }
     });
 }

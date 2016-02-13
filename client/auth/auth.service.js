@@ -1,12 +1,17 @@
+'use strict';
+
 module.exports = AuthService;
 
-function AuthService($http, $q) {
+function AuthService($http, $q, $log) {
+
+  let currentUser;
 
   return {
     authenticate,
-    currentUser,
-    isAuthenticated,
-    logout
+    getCurrentUser,
+    logout,
+    requiresAuth,
+    requiresRole
   };
 
   /***** PUBLIC *****/
@@ -14,25 +19,37 @@ function AuthService($http, $q) {
   function authenticate(username, password) {
     return $http.post('/api/login', { username, password })
       .then(res => {
-        console.log('login success: ', res);
+        $log.debug('login success: ', res);
+        currentUser = res.data.user;
         return res;
       })
       .catch(err => {
-        console.log('login error: ', err);
+        $log.error('login error: ', err);
         return $q.reject(err);
       });
   }
 
-  function currentUser() {
-
-  }
-
-  function isAuthenticated() {
-
+  function getCurrentUser() {
+    return currentUser;
   }
 
   function logout() {
-    
+    return $http.post('/api/logout')
+      .catch(err => $log.error('Logout error: ', err));
+  }
+
+  function requiresAuth() {
+    if (!currentUser) { return $q.reject('No user currently logged in'); }
+    return $q.resolve(currentUser);
+  }
+
+  function requiresRole(role) {
+    return this.requiresAuth().then(_checkRole);
+
+    function _checkRole(user) {
+      if (user.roles.indexOf(role) === -1) { return $q.reject('Unauthorized'); }
+      return $q.resolve('OK');
+    }
   }
 
 }

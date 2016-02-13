@@ -9,6 +9,6 @@ const AuthService = require('./auth.service');
 
 app.config(['$stateProvider', AuthRoute]);
 app.controller('AuthCtrl', [ '$state', 'authService', AuthCtrl]);
-app.factory('authService', [ '$http', '$q', AuthService]);
+app.factory('authService', [ '$http', '$q', '$log', AuthService]);
 
 module.exports = app.name;
