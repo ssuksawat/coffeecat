@@ -1,8 +1,6 @@
-/* Templates */
-require('./login.html');
-
 const app = require('angular').module('coffeecat.auth', [
-  'login.html'
+  /* HTML Templates */
+  require('./login.html').name
 ]);
 
 const AuthRoute = require('./auth.route');
