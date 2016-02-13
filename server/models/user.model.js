@@ -4,20 +4,20 @@ const mongoose = require('mongoose');
 const encrypt = require('../utilities/encryption');
 
 const userSchema = mongoose.Schema({
-    firstName: { type:String, required:'{PATH} is required!' },
-    lastName: { type:String, required:'{PATH} is required!' },
+    firstName: { type: String, required: '{PATH} is required!' },
+    lastName: { type: String, required: '{PATH} is required!' },
     username: {
         type: String,
         required: '{PATH} is required!',
         unique: true
     },
-    salt: { type:String, required:'{PATH} is required!' },
-    hashedPwd: { type:String, required:'{PATH} is required!' },
+    salt: { type: String, required: '{PATH} is required!' },
+    password: { type: String, required: '{PATH} is required!' },
     roles: [String]
 });
 userSchema.methods = {
     authenticate: function (password) {
-      return encrypt.hashPwd(this.salt, password) === this.hashedPwd;
+      return encrypt.hashPwd(this.salt, password) === this.password;
     },
     hasRole: function (role) {
       return this.roles.indexOf(role) > -1;
