@@ -49,5 +49,5 @@ function requiresRole(role) {
     } else {
       next();
     }
-  }
+  };
 }
