@@ -12,6 +12,6 @@ function AuthCtrl($state, authService) {
   function login() {
     authService.authenticate(vm.credentials.username, vm.credentials.password)
       .then(() => $state.go('admin'))
-      .catch(err => vm.error = err);
+      .catch(() => vm.error = 'WRONGGG! Try again...');
   }
 }
