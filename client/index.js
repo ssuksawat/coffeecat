@@ -1,3 +1,5 @@
+'use strict';
+
 const angular = require('angular');
 const ngResource = require('angular-resource');
 const ngMaterial = require('angular-material');
@@ -14,6 +16,7 @@ const app = angular.module('coffeecat', [
 ]);
 
 /* App Config */
+require('./app.config')(app);
 require('./app.routes')(app);
 
 angular.element(document).ready(() => {
