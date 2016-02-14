@@ -9,6 +9,16 @@
     box-sizing: border-box;
 }
 
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+div[ui-view] {
+  width: 100%;
+  height: 100%;
+}
+
 .text--warning {
   color: @color-red;
 }
@@ -16,3 +26,4 @@
 /* Import LESS files */
 @import "variables.import.less";
 @import "auth/auth.less";
+@import "admin/admin.less";
