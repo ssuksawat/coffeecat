@@ -30,7 +30,12 @@ function AuthService($http, $q, $log) {
   }
 
   function getCurrentUser() {
-    return currentUser;
+    if (currentUser) { return $q.resolve(currentUser); }
+    return $http.get('/api/currentuser').then(res => {
+      currentUser = res.data;
+      $log.debug('current user: ', currentUser);
+      return currentUser;
+    });
   }
 
   function logout() {
@@ -49,7 +54,7 @@ function AuthService($http, $q, $log) {
 
     function _checkRole(user) {
       if (user.roles.indexOf(role) === -1) { return $q.reject('UNAUTHORIZED'); }
-      return $q.resolve('OK');
+      return $q.resolve(currentUser);
     }
   }
 

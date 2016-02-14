@@ -3,11 +3,21 @@
 const passport = require('passport');
 
 module.exports = {
+  getCurrentUser,
   login,
   logout,
   requiresAuth,
   requiresRole
 };
+
+function getCurrentUser(req, res) {
+  res.send({
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
+    roles: req.user.roles,
+    username: req.user.username
+  });
+}
 
 function login(req, res, next) {
   req.body.username = req.body.username.toLowerCase();
@@ -44,7 +54,7 @@ function requiresAuth(req, res, next) {
 
 function requiresRole(role) {
   return function(req, res, next) {
-    if (req.isAuthenticated || req.user.roles.indexOf(role) === -1) {
+    if (req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
       res.sendStatus(403);
     } else {
       next();
