@@ -2,9 +2,9 @@
 
 const mongoose = require('mongoose');
 
-const emotionSchema = mongoose.Schema({
+const feelingSchema = mongoose.Schema({
   name: { type: String, required: '{PATH} is required!', unique: true },
   message: { type: String }
 });
 
-mongoose.model('Emotion', emotionSchema);
+mongoose.model('Feeling', feelingSchema);

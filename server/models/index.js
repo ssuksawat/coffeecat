@@ -2,7 +2,7 @@
 
 module.exports = function () {
   require('./coffee.model');
-  require('./emotion.model');
+  require('./feeling.model');
   require('./ingredient.model');
   require('./user.model');
 };

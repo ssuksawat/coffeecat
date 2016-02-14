@@ -1,6 +1,6 @@
 'use strict';
 
-const Emotion = require('mongoose').model('Emotion');
+const Feeling = require('mongoose').model('Feeling');
 
 module.exports = {
   create,
@@ -11,25 +11,25 @@ module.exports = {
 
 function create(req, res) {
   const data = req.body;
-  return Emotion.create(data)
+  return Feeling.create(data)
     .then(newIngr => res.send(newIngr))
     .catch(err => res.status(400).send({reason: err.toString()}));
 }
 
 function deleteItem(req, res) {
-  return Emotion.findByIdAndRemove(req.params.id).exec()
+  return Feeling.findByIdAndRemove(req.params.id).exec()
     .then(() => res.sendStatus(200))
     .catch(err => res.status(400).send({reason: err.toString()}));
 }
 
 function query(req, res) {
-  return Emotion.find({}).exec()
+  return Feeling.find({}).exec()
     .then(ingredients => res.send(ingredients))
     .catch(err => res.status(500).send({reason: err.toString()}));
 }
 
 function update(req, res) {
-  return Emotion.findByIdAndUpdate(req.params.id, req.body).exec()
+  return Feeling.findByIdAndUpdate(req.params.id, req.body).exec()
     .then(() => res.sendStatus(200))
     .catch(err => res.status(400).send({reason: err.toString()}));
 }
