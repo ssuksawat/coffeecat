@@ -1,0 +1,25 @@
+<div id="admin" layout="column">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <span>CoffeeCat | Behind The Scene</span>
+      <span flex></span>
+      <span>Hello, {{ admin.user.firstName }}</span>
+      <md-button ui-sref="logout">Logout</md-button>
+    </div>
+  </md-toolbar>
+  <md-tabs flex>
+
+    <md-tab label="Coffee">
+      Manage Coffee
+    </md-tab>
+
+    <md-tab label="Ingredients">
+      Manage Ingredients
+    </md-tab>
+
+    <md-tab label="Feelings">
+      Manage Feelings
+    </md-tab>
+
+  </md-tabs>
+</div>

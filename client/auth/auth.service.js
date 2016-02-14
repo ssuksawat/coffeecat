@@ -35,11 +35,12 @@ function AuthService($http, $q, $log) {
 
   function logout() {
     return $http.post('/api/logout')
+      .then(() => $log.debug('Logout success'))
       .catch(err => $log.error('Logout error: ', err));
   }
 
   function requiresAuth() {
-    if (!currentUser) { return $q.reject('No user currently logged in'); }
+    if (!currentUser) { return $q.reject('AUTH_REQUIRED'); }
     return $q.resolve(currentUser);
   }
 
@@ -47,7 +48,7 @@ function AuthService($http, $q, $log) {
     return this.requiresAuth().then(_checkRole);
 
     function _checkRole(user) {
-      if (user.roles.indexOf(role) === -1) { return $q.reject('Unauthorized'); }
+      if (user.roles.indexOf(role) === -1) { return $q.reject('UNAUTHORIZED'); }
       return $q.resolve('OK');
     }
   }
