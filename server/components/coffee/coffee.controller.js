@@ -13,7 +13,7 @@ module.exports = {
 function createDrink(req, res) {
   const data = req.body;
   return Coffee.create(data)
-    .then(newDrink => res.send(newDrink))
+    .then(newDrink => res.status(201).send(newDrink))
     .catch((err) => {
       if (err.toString().indexOf('E11000')) {
         err = new Error('This drink already exists');
@@ -41,7 +41,7 @@ function getDrinkById(req, res) {
 }
 
 function updateDrink(req, res) {
-  return Coffee.findByIdAndUpdate(req.params.id, req.body).exec()
-    .then(() => res.sendStatus(200))
+  return Coffee.findByIdAndUpdate(req.params.id, req.body, {new: true}).exec()
+    .then(coffee => res.send(coffee))
     .catch(err => res.status(400).send({reason: err.toString()}));
 }

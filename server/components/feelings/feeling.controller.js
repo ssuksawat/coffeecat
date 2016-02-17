@@ -29,7 +29,7 @@ function query(req, res) {
 }
 
 function update(req, res) {
-  return Feeling.findByIdAndUpdate(req.params.id, req.body).exec()
-    .then(() => res.sendStatus(200))
+  return Feeling.findByIdAndUpdate(req.params.id, req.body, {new: true}).exec()
+    .then(feeling => res.send(feeling))
     .catch(err => res.status(400).send({reason: err.toString()}));
 }
