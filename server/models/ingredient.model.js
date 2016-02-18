@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const ingredientSchema = mongoose.Schema({
-  name: { type: String, require: '{PATH} is required', unique: true },
+  name: { type: String, required: '{PATH} is required', unique: true },
   description: { type: String },
   months: {
     type: [String],
