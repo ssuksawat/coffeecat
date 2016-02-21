@@ -1,0 +1,22 @@
+<md-card>
+  <md-card-content>
+    <a layout ng-click="$ctrl.showMore = !$ctrl.showMore">
+      <h3 flex>{{$ctrl.model.name}}</h3>
+      <md-button class="md-icon-button"
+                 ng-class="{'is-expanded': $ctrl.showMore}">
+        <md-icon>expand_more</md-icon>
+      </md-button>
+    </a>
+    <div ng-if="$ctrl.showMore">
+      <p>{{$ctrl.model.description}}</p>
+      <p>Months: {{$ctrl.model.months}}</p>
+    </div>
+  </md-card-content>
+  <md-card-actions ng-if="$ctrl.showMore"
+                   layout layout-align="end center">
+    <md-button class="md-warn" ng-if="!$ctrl.isEditing">Delete</md-button>
+    <md-button ng-if="!$ctrl.isEditing" ng-click="$ctrl.isEditing = true">Edit</md-button>
+    <md-button ng-if="$ctrl.isEditing" ng-click="$ctrl.isEditing = false">Cancel</md-button>
+    <md-button ng-if="$ctrl.isEditing">Save</md-button>
+  </md-card-actions>
+</md-card>

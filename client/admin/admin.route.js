@@ -10,11 +10,9 @@ function AdminRoute($stateProvider) {
       controller: 'AdminCtrl',
       controllerAs: 'admin',
       resolve: {
-        'currentUser': ['authService', function (authService) {
-          return authService.getCurrentUser();
-        }],
-        'isAdmin': ['$state', 'authService', function ($state, authService) {
-          return authService.requiresRole('ADMIN')
+        'currentUser': ['$state', 'authService', function ($state, authService) {
+          return authService.getCurrentUser()
+            .then(() => { return authService.requiresRole('ADMIN'); })
             .catch(() => $state.go('login'));
         }]
       }
