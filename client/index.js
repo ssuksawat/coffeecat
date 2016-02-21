@@ -12,6 +12,7 @@ const app = angular.module('coffeecat', [
   ngMaterial,
 
   /* Components */
+  require('./models'),
   require('./auth'),
   require('./admin')
 ]);
