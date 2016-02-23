@@ -1,7 +1,7 @@
 <md-card>
   <md-card-content>
     <a layout layout-align="start center" ng-click="$ctrl.showMore = !$ctrl.showMore">
-      <h2 flex>{{$ctrl.model.name}}</h2>
+      <h3 flex>{{$ctrl.model.name}}</h3>
       <md-button class="md-icon-button"
                  ng-class="{'is-expanded': $ctrl.showMore}">
         <md-icon>expand_more</md-icon>
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <form name="$ctrl.coffeeForm" ng-if="$ctrl.isEditing" layout="column" novalidate>
+    <form name="$ctrl.coffeeForm" ng-if="$ctrl.showMore && $ctrl.isEditing" layout="column" novalidate>
       <md-input-container>
         <label>Name <span class="text--warning">*</span></label>
         <input ng-model="$ctrl.model.name" ng-required="true">

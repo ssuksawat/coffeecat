@@ -31,7 +31,7 @@ function CoffeeCardCtrl($scope, $log, Coffee) {
 
   function deleteSelf() {
     if (isNewObject()) { return vm.onDelete(); }
-    this.model.$delete()
+    vm.model.$delete()
       .then(() => $scope.$emit('delete:success'))
       .then(vm.onDelete)
       .catch(err => $log.error('Delete failed: ', err));

@@ -9,8 +9,8 @@ function AdminCtrl($scope, $mdToast, currentUser, Coffee, Feeling, Ingredient) {
 
   vm.user = currentUser;
   vm.addCoffee = () => vm.coffeeList.unshift({name: 'NEW Coffee - Edit Me!', ingredients: [], feelings: []});
-  vm.addFeeling = () => vm.feelingList.unshift({name: 'NEW Feeling - Edit Me!', months: []});
-  vm.addIngredient = () => vm.ingredientList.unshift({name: 'NEW Ingredient - Edit Me!'});
+  vm.addFeeling = () => vm.feelingList.unshift({name: 'NEW Feeling - Edit Me!'});
+  vm.addIngredient = () => vm.ingredientList.unshift({name: 'NEW Ingredient - Edit Me!', months: []});
 
   /***** EVENT LISTENERS *****/
 
