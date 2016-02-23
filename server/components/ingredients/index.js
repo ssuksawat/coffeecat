@@ -2,13 +2,14 @@
 
 const ingredient = require('./ingredient.controller');
 const ingredientRouter = require('express').Router();
+const auth = require('../auth/auth.controller');
 
 ingredientRouter.route('/')
   .get(ingredient.getIngredients)
-  .post(ingredient.createIngredient);
+  .post(auth.requiresRole('ADMIN'), ingredient.createIngredient);
 
 ingredientRouter.route('/:id')
-  .put(ingredient.updateIngredient)
-  .delete(ingredient.deleteIngredient);
+  .put(auth.requiresRole('ADMIN'), ingredient.updateIngredient)
+  .delete(auth.requiresRole('ADMIN'), ingredient.deleteIngredient);
 
 module.exports = ingredientRouter;

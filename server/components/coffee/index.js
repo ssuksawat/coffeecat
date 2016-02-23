@@ -2,14 +2,15 @@
 
 const coffee = require('./coffee.controller');
 const coffeeRouter = require('express').Router();
+const auth = require('../auth/auth.controller');
 
 coffeeRouter.route('/')
   .get(coffee.getDrinks)
-  .post(coffee.createDrink);
+  .post(auth.requiresRole('ADMIN'), coffee.createDrink);
 
 coffeeRouter.route('/:id')
   .get(coffee.getDrinkById)
-  .put(coffee.updateDrink)
-  .delete(coffee.deleteDrink);
+  .put(auth.requiresRole('ADMIN'), coffee.updateDrink)
+  .delete(auth.requiresRole('ADMIN'), coffee.deleteDrink);
 
 module.exports = coffeeRouter;
