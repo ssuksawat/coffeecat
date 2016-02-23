@@ -54,7 +54,7 @@ function requiresAuth(req, res, next) {
 
 function requiresRole(role) {
   return function(req, res, next) {
-    if (req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
+    if (!req.isAuthenticated() || req.user.roles.indexOf(role) === -1) {
       res.sendStatus(403);
     } else {
       next();
