@@ -19,8 +19,8 @@
     "eslint:server": "eslint server/**/*.js",
     "eslint:spec": "eslint client/**/*.spec.js tests/**/*.js",
     "pleeease": "pleeease compile",
-    "babelify": "browserify client/index.js --outfile dist/bundle.js",
-    "uglify": "uglifyjs — compress — mangle — dist/bundle.js -o dist/bundle.js",
+    "babelify": "browserify client/index.js --transform --outfile dist/bundle.js --source-maps",
+    "uglify": "uglifyjs --compress --mangle --output dist/bundle.js -- dist/bundle.js",
     "watch": "npm run watch:app & npm run watch:server",
     "watch:app": "npm run watch:js & npm run watch:css",
     "watch:server": "nodemon --ignore public/ --ignore client/ --ignore test/ server/app.js",
@@ -48,6 +48,7 @@
     "ui-router": "^0.2.15"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.5.0",
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "browserify-ng-html2js": "^1.1.5",
@@ -64,7 +65,7 @@
   "browserify": {
     "transform": [
       "browserify-ng-html2js",
-      "babelify"
+      ["babelify", { "presets": ["es2015"] }]
     ]
   }
 }
