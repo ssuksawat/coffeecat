@@ -12,12 +12,10 @@ module.exports = {
 
 function createDrink(req, res) {
   const data = req.body;
-  console.log('Data: ', data);
   return Coffee.create(data)
     .then(newDrink => res.status(201).send(newDrink))
     .catch((err) => {
-      console.log('Error: ', err);
-      if (err.toString().indexOf('E11000')) {
+      if (err.toString().indexOf('E11000') > -1) {
         err = new Error('This drink already exists');
       }
       res.status(400).send({reason: err.toString()});
