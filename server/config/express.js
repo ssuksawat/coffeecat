@@ -8,10 +8,10 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 
 module.exports = function (app, config) {
-  app.use(morgan('dev'));
+  app.use(morgan(config.logLevel));
   app.use(cookieParser());
   app.use(bodyParser.json());
-  app.use(session({secret: 'cool cats love coffee'}));
+  app.use(session({secret: config.secret}));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(express.static(config.rootPath + '/public'));
