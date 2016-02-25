@@ -17,6 +17,7 @@ function IngredientCardCtrl($scope, $log, Ingredient) {
   vm.save = save;
 
   vm.queryMonths = queryMonths;
+  vm.transformToUpper = ($chip) => $chip.toUpperCase();
 
   /***** PUBLIC *****/
 
