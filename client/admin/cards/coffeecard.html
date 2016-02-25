@@ -74,6 +74,7 @@
     </form>
   </md-card-content>
   <md-card-actions ng-if="$ctrl.showMore"layout layout-align="end center">
+    <md-progress-circular md-mode="indeterminate" ng-hide="!$ctrl.isLoading"></md-progress-circular>
     <md-button class="md-warn" ng-if="!$ctrl.isEditing" ng-click="$ctrl.delete()">Delete</md-button>
     <md-button ng-if="!$ctrl.isEditing" ng-click="$ctrl.toggleEdit()">Edit</md-button>
     <md-button ng-if="$ctrl.isEditing" ng-click="$ctrl.toggleEdit()">Cancel</md-button>

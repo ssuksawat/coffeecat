@@ -23,7 +23,9 @@ function IngredientCardCtrl($scope, $log, Ingredient) {
 
   function deleteSelf() {
     if (isNewObject()) { return vm.onDelete(); }
+    vm.isLoading = true;
     vm.model.$delete()
+      .then(() => vm.isLoading = false)
       .then(() => $scope.$emit('delete:success'))
       .then(vm.onDelete)
       .catch(err => $log.error('Delete failed: ', err));
@@ -40,10 +42,11 @@ function IngredientCardCtrl($scope, $log, Ingredient) {
       promise = Ingredient.save(vm.model).$promise;
     }
 
+    vm.isLoading = true;
     promise.then(_success).catch(err => $log.error('Save failed: ', err));
 
     function _success() {
-      vm.isEditing = false;
+      vm.isLoading = vm.isEditing = false;
       $scope.$emit('update:success');
     }
   }
