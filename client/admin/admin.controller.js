@@ -22,6 +22,10 @@ function AdminCtrl($scope, $mdToast, currentUser, Coffee, Feeling, Ingredient) {
     evt.stopPropagation();
     $mdToast.show($mdToast.simple().textContent('Delete Success!'));
   });
+  $scope.$on('error', (evt, reason) => {
+    evt.stopPropagation();
+    $mdToast.show($mdToast.simple().textContent('Error! ' + reason));
+  });
 
   /***** PRIVATE *****/
 

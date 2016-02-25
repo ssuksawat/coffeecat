@@ -25,10 +25,13 @@ function IngredientCardCtrl($scope, $log, Ingredient) {
     if (isNewObject()) { return vm.onDelete(); }
     vm.isLoading = true;
     vm.model.$delete()
-      .then(() => vm.isLoading = false)
       .then(() => $scope.$emit('delete:success'))
       .then(vm.onDelete)
-      .catch(err => $log.error('Delete failed: ', err));
+      .catch(err => {
+        $scope.$emit('error');
+        $log.error('Delete failed: ', err);
+      })
+      .finally(() => vm.isLoading = false);
   }
 
   function save() {
@@ -43,10 +46,16 @@ function IngredientCardCtrl($scope, $log, Ingredient) {
     }
 
     vm.isLoading = true;
-    promise.then(_success).catch(err => $log.error('Save failed: ', err));
+    promise
+      .then(_success)
+      .catch(err => {
+        $scope.$emit('error');
+        $log.error('Save failed: ', err);
+      })
+      .finally(() => vm.isLoading = false);
 
     function _success() {
-      vm.isLoading = vm.isEditing = false;
+      vm.isEditing = false;
       $scope.$emit('update:success');
     }
   }
