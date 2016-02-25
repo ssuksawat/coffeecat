@@ -1,0 +1,63 @@
+<div id="admin" layout="column">
+  <md-toolbar md-whiteframe>
+    <div class="md-toolbar-tools">
+      <span>CoffeeCat | Behind The Scene</span>
+      <span flex></span>
+      <span ng-if="$root.$mdMedia('gt-xs')">Hi, {{ admin.user.firstName }}</span>
+      <md-button class="md-warn" ui-sref="logout">Logout</md-button>
+    </div>
+  </md-toolbar>
+  <md-tabs md-stretch-tabs="always" flex>
+
+    <!-- Coffee Tab -->
+    <md-tab label="Coffee">
+      <md-content class="md-padding">
+        <div layout layout-padding>
+          <h2 flex>Manage Coffee</h2>
+          <md-button class="md-primary" ng-click="admin.addCoffee()">+ New Coffee</md-button>
+        </div>
+        <div layout layout-wrap>
+          <admin-coffee-card model="item"
+                             ingredient-list="::admin.ingredientList"
+                             feeling-list="::admin.feelingList"
+                             on-delete="admin.coffeeList.splice($index, 1)"
+                             ng-repeat="item in admin.coffeeList"
+                             layout-fill></admin-coffee-card>
+        </div>
+      </md-content>
+    </md-tab>
+
+    <!-- Ingredient Tab -->
+    <md-tab label="Ingredients">
+      <md-content class="md-padding">
+        <div layout layout-padding>
+          <h2 flex>Manage Ingredients</h2>
+          <md-button class="md-primary" ng-click="admin.addIngredient()">+ New Ingredient</md-button>
+        </div>
+        <div layout layout-wrap>
+          <admin-ingredient-card model="item"
+                                 on-delete="admin.ingredientList.splice($index, 1)"
+                                 ng-repeat="item in admin.ingredientList"
+                                 layout-fill></admin-ingredient-card>
+        </div>
+      </md-content>
+    </md-tab>
+
+    <!-- Feelings Tab -->
+    <md-tab label="Feelings">
+      <md-content class="md-padding">
+        <div layout layout-padding>
+          <h2 flex>Manage Feelings</h2>
+          <md-button class="md-primary" ng-click="admin.addFeeling()">+ New Feelings</md-button>
+        </div>
+        <div layout layout-wrap>
+          <admin-feeling-card model="item"
+                                 on-delete="admin.feelingList.splice($index, 1)"
+                                 ng-repeat="item in admin.feelingList"
+                                 layout-fill></admin-feeling-card>
+        </div>
+      </md-content>
+    </md-tab>
+
+  </md-tabs>
+</div>
