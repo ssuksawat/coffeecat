@@ -32,12 +32,12 @@ function CoffeeCardCtrl() {
 
   function deleteSelf() {
     vm.isLoading = true;
-    vm.onDelete({model: vm.model}).finally(() => vm.isLoading = false);
+    vm.onDelete().finally(() => vm.isLoading = false);
   }
 
   function save() {
     vm.isLoading = true;
-    vm.onSave({model: vm.model})
+    vm.onSave()
       .then(() => angular.copy(vm.model, orig))
       .then(() => vm.isEditing = false)
       .finally(() => vm.isLoading = false);
