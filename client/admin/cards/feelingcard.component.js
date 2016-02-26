@@ -3,65 +3,31 @@
 const FeelingCard = {
   bindings: {
     model: '=',
-    onDelete: '&'
+    onDelete: '&',
+    onSave: '&'
   },
   templateUrl: 'feelingcard.html',
-  controller: ['$scope', '$log', 'Feeling', FeelingCardCtrl]
+  controller: FeelingCardCtrl
 };
 
-function FeelingCardCtrl($scope, $log, Feeling) {
+function FeelingCardCtrl() {
   const vm = this;
 
-  // TODO: Refactor delete() & save() to a reusable service
   vm.delete = deleteSelf;
   vm.save = save;
 
   /***** PUBLIC *****/
 
   function deleteSelf() {
-    if (isNewObject()) { return vm.onDelete(); }
     vm.isLoading = true;
-    vm.model.$delete()
-      .then(() => $scope.$emit('delete:success'))
-      .then(vm.onDelete)
-      .catch(err => {
-        $scope.$emit('error');
-        $log.error('Delete failed: ', err);
-      })
-      .finally(() => vm.isLoading = false);
+    vm.onDelete({model: vm.model}).finally(() => vm.isLoading = false);
   }
 
   function save() {
-    let promise;
-
-    if (!isNewObject()) {
-      // Update existing
-      promise = vm.model.$update();
-    } else {
-      // Create new instance
-      promise = Feeling.save(vm.model).$promise;
-    }
-
     vm.isLoading = true;
-    promise
-      .then(_success)
-      .catch(err => {
-        $scope.$emit('error');
-        $log.error('Save failed: ', err);
-      })
+    vm.onSave({model: vm.model})
+      .then(() => vm.isEditing = false)
       .finally(() => vm.isLoading = false);
-
-    function _success() {
-      vm.isEditing = false;
-      $scope.$emit('update:success');
-    }
-  }
-
-  /***** PRIVATE *****/
-
-  // TODO: Refactor out to reusable service
-  function isNewObject() {
-    return vm.model._id === undefined;
   }
 }
 

@@ -1,7 +1,7 @@
 <div id="admin" layout="column">
   <md-toolbar md-whiteframe>
     <div class="md-toolbar-tools">
-      <span>CoffeeCat | Behind The Scene</span>
+      <span>CoffeeCat <span ng-show="$root.$mdMedia('gt-xs')">| Behind The Scene</span></span>
       <span flex></span>
       <span ng-if="$root.$mdMedia('gt-xs')">Hi, {{ admin.user.firstName }}</span>
       <md-button class="md-warn" ui-sref="logout">Logout</md-button>
@@ -20,7 +20,8 @@
           <admin-coffee-card model="item"
                              ingredient-list="::admin.ingredientList"
                              feeling-list="::admin.feelingList"
-                             on-delete="admin.coffeeList.splice($index, 1)"
+                             on-delete="admin.deleteItem(model, $index)"
+                             on-save="admin.saveItem(model)"
                              ng-repeat="item in admin.coffeeList"
                              layout-fill></admin-coffee-card>
         </div>
@@ -36,7 +37,8 @@
         </div>
         <div layout layout-wrap>
           <admin-ingredient-card model="item"
-                                 on-delete="admin.ingredientList.splice($index, 1)"
+                                 on-delete="admin.deleteItem(model, $index)"
+                                 on-save="admin.saveItem(model)"
                                  ng-repeat="item in admin.ingredientList"
                                  layout-fill></admin-ingredient-card>
         </div>
@@ -52,9 +54,10 @@
         </div>
         <div layout layout-wrap>
           <admin-feeling-card model="item"
-                                 on-delete="admin.feelingList.splice($index, 1)"
-                                 ng-repeat="item in admin.feelingList"
-                                 layout-fill></admin-feeling-card>
+                              on-delete="admin.deleteItem(model, $index)"
+                              on-save="admin.saveItem(model)"
+                              ng-repeat="item in admin.feelingList"
+                              layout-fill></admin-feeling-card>
         </div>
       </md-content>
     </md-tab>

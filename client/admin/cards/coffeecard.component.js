@@ -7,15 +7,16 @@ const CoffeeCard = {
     model: '=',
     ingredientList: '=?',
     feelingList: '=?',
-    onDelete: '&'
+    onDelete: '&',
+    onSave: '&'
   },
   templateUrl: 'coffeecard.html',
-  controller: ['$scope', '$log', 'Coffee', CoffeeCardCtrl]
+  controller: CoffeeCardCtrl
 };
 
-function CoffeeCardCtrl($scope, $log, Coffee) {
+function CoffeeCardCtrl() {
   const vm = this;
-  let orig = {};
+  const orig = {};
 
   // Component Actions
   vm.delete = deleteSelf;
@@ -30,43 +31,16 @@ function CoffeeCardCtrl($scope, $log, Coffee) {
   /***** PUBLIC *****/
 
   function deleteSelf() {
-    if (isNewObject()) { return vm.onDelete(); }
     vm.isLoading = true;
-    vm.model.$delete()
-      .then(() => $scope.$emit('delete:success'))
-      .then(vm.onDelete)
-      .catch(err => {
-        $scope.$emit('error');
-        $log.error('Delete failed: ', err);
-      })
-      .finally(() => vm.isLoading = false);
+    vm.onDelete({model: vm.model}).finally(() => vm.isLoading = false);
   }
 
   function save() {
-    let promise;
-
-    if (!isNewObject()) {
-      // Update existing
-      promise = vm.model.$update();
-    } else {
-      // Create new instance
-      promise = Coffee.save(vm.model).$promise;
-    }
-
     vm.isLoading = true;
-    promise
-      .then(_success)
-      .catch(err => {
-        $scope.$emit('error');
-        $log.error('Save failed: ', err);
-      })
+    vm.onSave({model: vm.model})
+      .then(() => angular.copy(vm.model, orig))
+      .then(() => vm.isEditing = false)
       .finally(() => vm.isLoading = false);
-
-    function _success() {
-      orig = {};
-      vm.isEditing = false;
-      $scope.$emit('update:success');
-    }
   }
 
   function queryFeeling(query) {
@@ -83,12 +57,6 @@ function CoffeeCardCtrl($scope, $log, Coffee) {
       angular.copy(vm.model, orig);
     }
     vm.isEditing = !vm.isEditing;
-  }
-
-  /***** PRIVATE *****/
-
-  function isNewObject() {
-    return vm.model._id === undefined;
   }
 }
 

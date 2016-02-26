@@ -21,6 +21,8 @@ const IngredientCard = require('./cards/ingredientcard.component');
 app.config(['$stateProvider', AdminRoute]);
 app.controller('AdminCtrl', [
   '$scope',
+  '$q',
+  '$log',
   '$mdToast',
   'currentUser',
   'Coffee',
