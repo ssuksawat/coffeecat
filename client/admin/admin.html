@@ -17,13 +17,14 @@
           <md-button class="md-primary" ng-click="admin.addCoffee()">+ New Coffee</md-button>
         </div>
         <div layout layout-wrap>
-          <admin-coffee-card model="item"
-                             ingredient-list="::admin.ingredientList"
-                             feeling-list="::admin.feelingList"
-                             on-delete="admin.deleteItem(model, $index)"
-                             on-save="admin.saveItem(model)"
-                             ng-repeat="item in admin.coffeeList"
-                             layout-fill></admin-coffee-card>
+          <admin-coffee-card
+            model="item"
+            ingredient-list="::admin.ingredientList"
+            feeling-list="::admin.feelingList"
+            on-delete="admin.deleteItem(item, $index)"
+            on-save="admin.saveItem(item)"
+            ng-repeat="item in admin.coffeeList"
+            flex-xs="100" flex-sm="100" flex-gt-sm="50"></admin-coffee-card>
         </div>
       </md-content>
     </md-tab>
@@ -36,11 +37,12 @@
           <md-button class="md-primary" ng-click="admin.addIngredient()">+ New Ingredient</md-button>
         </div>
         <div layout layout-wrap>
-          <admin-ingredient-card model="item"
-                                 on-delete="admin.deleteItem(model, $index)"
-                                 on-save="admin.saveItem(model)"
-                                 ng-repeat="item in admin.ingredientList"
-                                 layout-fill></admin-ingredient-card>
+          <admin-ingredient-card
+            model="item"
+            on-delete="admin.deleteItem(item, $index)"
+            on-save="admin.saveItem(item)"
+            ng-repeat="item in admin.ingredientList"
+            flex-xs="100" flex-sm="100" flex-gt-sm="50"></admin-ingredient-card>
         </div>
       </md-content>
     </md-tab>
@@ -53,11 +55,12 @@
           <md-button class="md-primary" ng-click="admin.addFeeling()">+ New Feelings</md-button>
         </div>
         <div layout layout-wrap>
-          <admin-feeling-card model="item"
-                              on-delete="admin.deleteItem(model, $index)"
-                              on-save="admin.saveItem(model)"
-                              ng-repeat="item in admin.feelingList"
-                              layout-fill></admin-feeling-card>
+          <admin-feeling-card
+            model="item"
+            on-delete="admin.deleteItem(item, $index)"
+            on-save="admin.saveItem(item)"
+            ng-repeat="item in admin.feelingList"
+            flex-xs="100" flex-sm="100" flex-gt-sm="50"></admin-feeling-card>
         </div>
       </md-content>
     </md-tab>
