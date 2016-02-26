@@ -43,6 +43,7 @@ function AdminCtrl($scope, $q, $log, $mdToast, currentUser, Coffee, Feeling, Ing
     if (!model) { return $q.reject(); }
 
     let promise;
+    model.name = model.name.toLowerCase(); //lowercase all for consistency
     if (model._id) {
       // Update existing
       promise = model.$update();
