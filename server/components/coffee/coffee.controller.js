@@ -29,7 +29,10 @@ function deleteDrink(req, res) {
 }
 
 function getDrinks(req, res) {
-  return Coffee.find({}).exec()
+  return Coffee.find({})
+    .sort({name: 1})
+    .select('-__v -createdAt -updatedAt')
+    .exec()
     .then(drinks => res.send(drinks))
     .catch(err => res.status(500).send(err));
 }

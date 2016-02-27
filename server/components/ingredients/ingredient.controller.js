@@ -23,7 +23,10 @@ function deleteIngredient(req, res) {
 }
 
 function getIngredients(req, res) {
-  return Ingredient.find({}).exec()
+  return Ingredient.find({})
+    .sort({name: 1})
+    .select('-__v')
+    .exec()
     .then(ingredients => res.send(ingredients))
     .catch(err => res.status(500).send({reason: err.toString()}));
 }

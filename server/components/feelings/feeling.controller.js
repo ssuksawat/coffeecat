@@ -23,7 +23,10 @@ function deleteItem(req, res) {
 }
 
 function query(req, res) {
-  return Feeling.find({}).exec()
+  return Feeling.find({})
+    .sort({name: 1})
+    .select('-__v')
+    .exec()
     .then(ingredients => res.send(ingredients))
     .catch(err => res.status(500).send({reason: err.toString()}));
 }
