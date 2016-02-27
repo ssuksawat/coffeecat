@@ -7,13 +7,7 @@
         <md-icon>expand_more</md-icon>
       </md-button>
     </a>
-    <div ng-if="$ctrl.showMore && !$ctrl.isEditing">
-      <h5>Description</h5>
-      <p>{{$ctrl.model.description || "none"}}</p>
-      <h5>Months</h5>
-      <md-chips ng-model="$ctrl.model.months" readonly="true"></md-chips>
-    </div>
-    <form name="$ctrl.ingredientForm" ng-if="$ctrl.showMore && $ctrl.isEditing" layout="column" novalidate>
+    <form name="$ctrl.ingredientForm" ng-if="$ctrl.showMore" layout="column" novalidate>
       <md-input-container>
         <label>Name <span class="text--warning">*</span></label>
         <input ng-model="$ctrl.model.name" ng-required="true">
@@ -35,15 +29,14 @@
           <md-not-found>No matches found.</md-not-found>
         </md-autocomplete>
       </md-chips>
+      <br>
+      <md-card-actions ng-if="$ctrl.showMore" layout layout-align="end center">
+        <md-progress-circular md-mode="indeterminate" ng-hide="!$ctrl.isLoading"></md-progress-circular>
+        <md-button class="md-warn" ng-click="$ctrl.delete()">Delete</md-button>
+        <md-button class="md-primary" type="submit"
+                   ng-disabled="$ctrl.ingredientForm.$pristine || $ctrl.ingredientForm.$invalid"
+                   ng-click="$ctrl.save()">Save</md-button>
+      </md-card-actions>
     </form>
   </md-card-content>
-  <md-card-actions ng-if="$ctrl.showMore" layout layout-align="end center">
-    <md-progress-circular md-mode="indeterminate" ng-hide="!$ctrl.isLoading"></md-progress-circular>
-    <md-button class="md-warn" ng-if="!$ctrl.isEditing" ng-click="$ctrl.delete()">Delete</md-button>
-    <md-button ng-if="!$ctrl.isEditing" ng-click="$ctrl.isEditing = true">Edit</md-button>
-    <md-button ng-if="$ctrl.isEditing" ng-click="$ctrl.isEditing = false">Cancel</md-button>
-    <md-button ng-if="$ctrl.isEditing"
-               ng-disabled="$ctrl.ingredientForm.$invalid"
-               ng-click="$ctrl.save()">Save</md-button>
-  </md-card-actions>
 </md-card>

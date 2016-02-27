@@ -7,34 +7,26 @@
         <md-icon>expand_more</md-icon>
       </md-button>
     </a>
-    <div ng-if="$ctrl.showMore && !$ctrl.isEditing">
-      <h5>Value</h5>
-      <p>{{$ctrl.model.value}}</p>
-      <h5>Message</h5>
-      <p>{{$ctrl.model.message}}</p>
-    </div>
-    <form name="$ctrl.feelingForm" ng-if="$ctrl.showMore && $ctrl.isEditing" layout="column" novalidate>
+    <form name="$ctrl.feelingForm" ng-if="$ctrl.showMore" layout="column" novalidate>
       <md-input-container>
         <label>Name <span class="text--warning">*</span></label>
         <input ng-model="$ctrl.model.name" ng-required="true">
       </md-input-container>
       <md-input-container>
         <label>Number</label>
-        <input type="number" ng-model="$ctrl.model.value" min="0" max="100" ng-required="true">
+        <input type="number" ng-model="$ctrl.model.value" min="0" max="100">
       </md-input-container>
       <md-input-container>
         <label>Message</label>
         <textarea ng-model="$ctrl.model.message" columns="1" md-maxlength="200" rows="5"></textarea>
       </md-input-container>
+      <md-card-actions ng-if="$ctrl.showMore" layout layout-align="end center">
+        <md-progress-circular md-mode="indeterminate" ng-hide="!$ctrl.isLoading"></md-progress-circular>
+        <md-button class="md-warn" ng-click="$ctrl.delete()">Delete</md-button>
+        <md-button class="md-primary" type="submit"
+          ng-disabled="$ctrl.feelingForm.$pristine || $ctrl.feelingForm.$invalid"
+          ng-click="$ctrl.save()">Save</md-button>
+      </md-card-actions>
     </form>
   </md-card-content>
-  <md-card-actions ng-if="$ctrl.showMore" layout layout-align="end center">
-    <md-progress-circular md-mode="indeterminate" ng-hide="!$ctrl.isLoading"></md-progress-circular>
-    <md-button class="md-warn" ng-if="!$ctrl.isEditing" ng-click="$ctrl.delete()">Delete</md-button>
-    <md-button ng-if="!$ctrl.isEditing" ng-click="$ctrl.isEditing = true">Edit</md-button>
-    <md-button ng-if="$ctrl.isEditing" ng-click="$ctrl.isEditing = false">Cancel</md-button>
-    <md-button ng-if="$ctrl.isEditing"
-               ng-disabled="$ctrl.feelingForm.$invalid"
-               ng-click="$ctrl.save()">Save</md-button>
-  </md-card-actions>
 </md-card>

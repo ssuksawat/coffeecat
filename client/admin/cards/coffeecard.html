@@ -7,27 +7,7 @@
         <md-icon>expand_more</md-icon>
       </md-button>
     </a>
-    <div ng-if="$ctrl.showMore && !$ctrl.isEditing">
-      <h5>Description</h5>
-      <p>{{$ctrl.model.description}}</p>
-      <div layout layout-align="start start" layout-wrap>
-        <div layout="column" flex="20">
-          <h5>Cup Size</h5>
-          <div>{{$ctrl.model.cupSize}}</div>
-        </div>
-        <div layout="column" flex="40">
-          <h5>Ingredients</h5>
-          <div ng-repeat="entry in $ctrl.model.ingredients">
-            {{entry.name}} - {{entry.qty}}
-          </div>
-        </div>
-        <div layout="column" flex="40">
-          <h5>Feelings</h5>
-          <div ng-repeat="entry in $ctrl.model.feelings">{{entry}}</div>
-        </div>
-      </div>
-    </div>
-    <form name="$ctrl.coffeeForm" ng-if="$ctrl.showMore && $ctrl.isEditing" layout="column" novalidate>
+    <form name="$ctrl.coffeeForm" ng-if="$ctrl.showMore" layout="column" novalidate>
       <md-input-container>
         <label>Name <span class="text--warning">*</span></label>
         <input ng-model="$ctrl.model.name" ng-required="true">
@@ -53,7 +33,8 @@
           <md-not-found>No matches found.</md-not-found>
         </md-autocomplete>
       </md-chips>
-      <div class="ingredient__form" layout="column">
+      <br>
+      <div layout="column">
         <h5>List of Ingredients</h5>
         <div ng-repeat="item in $ctrl.model.ingredients" layout>
           <md-input-container flex="70">
@@ -69,17 +50,15 @@
             <md-icon>clear</md-icon>
           </md-button>
         </div>
-        <md-button class="md-accent" ng-click="$ctrl.addIngredient()">+ More Ingredient</md-button>
+        <md-button class="md-primary md-hue-2" ng-click="$ctrl.addIngredient()">+ More Ingredient</md-button>
       </div>
+      <md-card-actions ng-if="$ctrl.showMore"layout layout-align="end center">
+        <md-progress-circular md-mode="indeterminate" ng-hide="!$ctrl.isLoading"></md-progress-circular>
+        <md-button class="md-warn" ng-click="$ctrl.delete()">Delete</md-button>
+        <md-button class="md-primary" type="submit"
+          ng-disabled="$ctrl.coffeeForm.$pristine || $ctrl.coffeeForm.$invalid"
+          ng-click="$ctrl.save()">Save</md-button>
+      </md-card-actions>
     </form>
   </md-card-content>
-  <md-card-actions ng-if="$ctrl.showMore"layout layout-align="end center">
-    <md-progress-circular md-mode="indeterminate" ng-hide="!$ctrl.isLoading"></md-progress-circular>
-    <md-button class="md-warn" ng-if="!$ctrl.isEditing" ng-click="$ctrl.delete()">Delete</md-button>
-    <md-button ng-if="!$ctrl.isEditing" ng-click="$ctrl.toggleEdit()">Edit</md-button>
-    <md-button ng-if="$ctrl.isEditing" ng-click="$ctrl.toggleEdit()">Cancel</md-button>
-    <md-button ng-if="$ctrl.isEditing"
-               ng-disabled="$ctrl.coffeeForm.$invalid"
-               ng-click="$ctrl.save()">Save</md-button>
-  </md-card-actions>
 </md-card>

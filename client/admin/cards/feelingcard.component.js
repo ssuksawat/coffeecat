@@ -26,7 +26,7 @@ function FeelingCardCtrl() {
   function save() {
     vm.isLoading = true;
     vm.onSave()
-      .then(() => vm.isEditing = false)
+      .then(() => vm.feelingForm.$setPristine(true))
       .finally(() => vm.isLoading = false);
   }
 }

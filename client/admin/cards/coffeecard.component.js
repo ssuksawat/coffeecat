@@ -1,7 +1,5 @@
 'use strict';
 
-const angular = require('angular');
-
 const CoffeeCard = {
   bindings: {
     model: '=',
@@ -16,7 +14,6 @@ const CoffeeCard = {
 
 function CoffeeCardCtrl() {
   const vm = this;
-  const orig = {};
 
   // Component Actions
   vm.delete = deleteSelf;
@@ -26,7 +23,6 @@ function CoffeeCardCtrl() {
   vm.addIngredient = () => vm.model.ingredients.push({});
   vm.chipToString = ($chip) => $chip.name;
   vm.queryFeeling = queryFeeling;
-  vm.toggleEdit = toggleEdit;
 
   /***** PUBLIC *****/
 
@@ -38,9 +34,8 @@ function CoffeeCardCtrl() {
   function save() {
     vm.isLoading = true;
     vm.onSave()
-      .then(() => angular.copy(vm.model, orig))
-      .then(() => vm.isEditing = false)
-      .finally(() => vm.isLoading = false);
+    .then(() => vm.coffeeForm.$setPristine(true))
+    .finally(() => vm.isLoading = false);
   }
 
   function queryFeeling(query) {
@@ -48,15 +43,6 @@ function CoffeeCardCtrl() {
     return vm.feelingList.filter((feeling) => {
       return feeling.name.includes(query.toLowerCase());
     });
-  }
-
-  function toggleEdit() {
-    if (vm.isEditing) { // exit EDIT mode
-      angular.copy(orig, vm.model);
-    } else { // enter EDIT mode
-      angular.copy(vm.model, orig);
-    }
-    vm.isEditing = !vm.isEditing;
   }
 }
 
