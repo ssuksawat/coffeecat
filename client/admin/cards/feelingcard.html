@@ -8,6 +8,8 @@
       </md-button>
     </a>
     <div ng-if="$ctrl.showMore && !$ctrl.isEditing">
+      <h5>Value</h5>
+      <p>{{$ctrl.model.value}}</p>
       <h5>Message</h5>
       <p>{{$ctrl.model.message}}</p>
     </div>
@@ -15,6 +17,10 @@
       <md-input-container>
         <label>Name <span class="text--warning">*</span></label>
         <input ng-model="$ctrl.model.name" ng-required="true">
+      </md-input-container>
+      <md-input-container>
+        <label>Number</label>
+        <input type="number" ng-model="$ctrl.model.value" min="0" max="100" ng-required="true">
       </md-input-container>
       <md-input-container>
         <label>Message</label>
