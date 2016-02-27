@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const compress = require('compression');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -8,6 +9,7 @@ const passport = require('passport');
 const Session = require('./session');
 
 module.exports = function (app, config) {
+  app.use(compress());
   app.use(morgan(config.logLevel));
   app.use(cookieParser());
   app.use(bodyParser.json());
