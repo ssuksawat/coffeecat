@@ -8,7 +8,7 @@ const uiRouter = require('ui-router');
 const app = angular.module('coffeecat', [
   /* Dependencies */
   ngResource,
-  uiRouter,
+  uiRouter.default,
   ngMaterial,
 
   /* Components */
