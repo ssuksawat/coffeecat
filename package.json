@@ -10,7 +10,7 @@
     "test:client": "",
     "test:server": "",
     "prebuild": "npm run clean",
-    "build": "npm run build:js & npm run build:css",
+    "build": "npm run build:js && npm run build:css",
     "build:js": "npm run babelify && npm run uglify",
     "build:css": "npm run pleeease",
     "clean": "rimraf dist/*",
