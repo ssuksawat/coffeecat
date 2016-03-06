@@ -47,23 +47,5 @@
       </md-content>
     </md-tab>
 
-    <!-- Feelings Tab -->
-    <md-tab label="Feelings">
-      <md-content class="md-padding">
-        <div layout layout-padding>
-          <h2 flex>Manage Feelings</h2>
-          <md-button class="md-primary" ng-click="admin.addFeeling()">+ New Feelings</md-button>
-        </div>
-        <div layout layout-wrap>
-          <admin-feeling-card
-            model="item"
-            on-delete="admin.deleteItem(item, $index)"
-            on-save="admin.saveItem(item)"
-            ng-repeat="item in admin.feelingList"
-            flex-xs="100" flex-sm="100" flex-gt-sm="50"></admin-feeling-card>
-        </div>
-      </md-content>
-    </md-tab>
-
   </md-tabs>
 </div>

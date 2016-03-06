@@ -2,14 +2,13 @@
 
 module.exports = AdminCtrl;
 
-function AdminCtrl($scope, $q, $log, $mdToast, currentUser, Coffee, Feeling, Ingredient) {
+function AdminCtrl($scope, $q, $log, $mdToast, currentUser, Coffee, Ingredient) {
   const vm = this;
 
   init();
 
   vm.user = currentUser;
-  vm.addCoffee = () => vm.coffeeList.unshift(new Coffee({name: 'NEW Coffee - Edit Me!', ingredients: [], feelings: []}));
-  vm.addFeeling = () => vm.feelingList.unshift(new Feeling({name: 'NEW Feeling - Edit Me!'}));
+  vm.addCoffee = () => vm.coffeeList.unshift(new Coffee({name: 'NEW Coffee - Edit Me!', ingredients: []}));
   vm.addIngredient = () => vm.ingredientList.unshift(new Ingredient({name: 'NEW Ingredient - Edit Me!', months: []}));
   vm.deleteItem = deleteItem;
   vm.saveItem = saveItem;
@@ -67,7 +66,6 @@ function AdminCtrl($scope, $q, $log, $mdToast, currentUser, Coffee, Feeling, Ing
 
   function init() {
     vm.coffeeList = Coffee.query();
-    vm.feelingList = Feeling.query();
     vm.ingredientList = Ingredient.query();
   }
 }
