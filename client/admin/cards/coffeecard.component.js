@@ -4,7 +4,6 @@ const CoffeeCard = {
   bindings: {
     model: '=',
     ingredientList: '=?',
-    feelingList: '=?',
     onDelete: '&',
     onSave: '&'
   },
@@ -22,7 +21,6 @@ function CoffeeCardCtrl() {
   // Helpers
   vm.addIngredient = () => vm.model.ingredients.push({});
   vm.chipToString = ($chip) => $chip.name;
-  vm.queryFeeling = queryFeeling;
 
   /***** PUBLIC *****/
 
@@ -36,13 +34,6 @@ function CoffeeCardCtrl() {
     vm.onSave()
     .then(() => vm.coffeeForm.$setPristine(true))
     .finally(() => vm.isLoading = false);
-  }
-
-  function queryFeeling(query) {
-    if (!query) { return []; }
-    return vm.feelingList.filter((feeling) => {
-      return feeling.name.includes(query.toLowerCase());
-    });
   }
 }
 

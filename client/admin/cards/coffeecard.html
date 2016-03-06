@@ -20,20 +20,14 @@
         <label>Cup Size <small>(S, M, L, XL)</small></label>
         <input ng-model="$ctrl.model.cupSize">
       </md-input-container>
-      <md-chips ng-model="$ctrl.model.feelings"
-                md-autocomplete-snap
-                md-transform-chip="$ctrl.chipToString($chip)">
-        <md-autocomplete
-            md-search-text="$ctrl.feelingText"
-            md-items="item in $ctrl.queryFeeling($ctrl.feelingText)"
-            md-item-text="item.name"
-            md-select-on-match="true"
-            placeholder="Feelings...">
-          <span md-highlight-text="$ctrl.feelingText">{{item.name}}</span>
-          <md-not-found>No matches found.</md-not-found>
-        </md-autocomplete>
-      </md-chips>
-      <br>
+      <md-input-container>
+        <label>Energy Level <small>(0 - 100)</small></label>
+        <input type="number" min="0" max="100" ng-model="$ctrl.model.energy">
+      </md-input-container>
+      <md-input-container>
+        <label>Sweetness Level <small>(0 - 100)</small></label>
+        <input type="number" min="0" max="100" ng-model="$ctrl.model.sweetness">
+      </md-input-container>
       <div layout="column">
         <h5>List of Ingredients</h5>
         <div ng-repeat="item in $ctrl.model.ingredients" layout>
